@@ -1,6 +1,8 @@
 # start
 
-IC2test.pyを動かして
+## 1:mpu6050data/mpu6050data.inoをコピーし、arduinoで動かす
+
+## 2:IC2test.pyを動かして
 
 ```shell
 ['2022/07/03 02:52:37.202883', -0.08, -0.03, 1.05, 3.05, 0.93, -1.0, 1.0]
@@ -16,6 +18,10 @@ IC2test.pyを動かして
 ```
 
 と出力されれば準備完了
+
+## 3:main.pyを動かす
+
+
 
 [arduino uno購入先](https://www.amazon.co.jp/Arduino-Rev3-ATmega328-%E3%83%9E%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%89-A000066/dp/B008GRTSV6)
 
