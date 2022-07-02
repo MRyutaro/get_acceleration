@@ -31,18 +31,17 @@ def add_data_at_intervals(line_disp):
     global data
     line_disp = line_disp.split(',')
 
-    now = datetime.datetime.now()
-    d = now.strftime('%Y/%m/%d %H:%M:%S.%f')
+    time = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
 
-    if len(line_disp) == 6:
+    if len(line_disp) == 7:
         tmp_float_line = list()
-        for i in range(6):
+        for i in range(7):
             # 空白''が入っていないときだけ記録
             if line_disp[i] != '':
                 tmp_float_line.append(float(line_disp[i]))
             else:
                 return
-        tmp_float_line.insert(0, d)
+        tmp_float_line.insert(0, time)
 
         print(tmp_float_line)
         data.append(tmp_float_line)
@@ -50,7 +49,7 @@ def add_data_at_intervals(line_disp):
 
 def save_to_csv(csv_path, data):
     df = pd.DataFrame(data=data, columns=[
-                      "time", "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z"])
+                      "time", "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z", "light"])
 
     if os.path.exists("data/csv") == False:
         os.mkdir("data/csv")
@@ -60,9 +59,8 @@ def save_to_csv(csv_path, data):
 
 
 def setup_csv_path():
-    now = datetime.datetime.now()
-    d = now.strftime('%Y_%m%d_%H%M')
-    csv_path = f"data/csv/{d}.csv"
+    time = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
+    csv_path = f"data/csv/{time}.csv"
     if os.path.exists(csv_path) == True:
         print("1分後待ってプログラムを動かしてください\n")
         exit()
@@ -71,8 +69,3 @@ def setup_csv_path():
 
 if __name__ == "__main__":
     main()
-
-
-"""
-acc_x,acc_y,acc_z,gyro_x,gyro_y,gyro_z
-"""
