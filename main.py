@@ -60,6 +60,8 @@ def save_to_csv(csv_path, data):
 
 def setup_csv_path():
     time = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
+    if os.path.exists("data/csv") == False:
+        os.mkdir("data/csv")
     csv_path = f"data/csv/{time}.csv"
     if os.path.exists(csv_path) == True:
         print("1分後待ってプログラムを動かしてください\n")
