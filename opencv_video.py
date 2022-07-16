@@ -11,7 +11,7 @@ fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 now = datetime.datetime.today().strftime('%Y_%m%d_%H%M')
 name = "data/video/" + now + ".mp4"
 video = cv2.VideoWriter(name, fourcc, fps, (width, height))
- 
+
 print("start")
 roop = int(fps * time)
 for i in range(roop):
