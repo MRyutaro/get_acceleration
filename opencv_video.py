@@ -1,14 +1,14 @@
 import cv2
 import datetime
 
-time = 10
+time = 5
 
 fps = 30.0
 cap = cv2.VideoCapture(1)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-name = datetime.datetime.today().strftime('%Y_%m%d_%H%M') + ".mp4"
+name = "data/video/" + datetime.datetime.today().strftime('%Y_%m%d_%H%M') + ".mp4"
 video = cv2.VideoWriter(name, fourcc, fps, (width, height))
  
 print("start")

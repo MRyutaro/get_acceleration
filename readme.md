@@ -5,7 +5,11 @@
 pip3 install -r requirements.txt
 ```
 
-## 2:IC2test.pyを動かして
+## 4:ハード側の準備
+![arduino](docs/image/arduino.png)
+![mpu6050](docs/image/mpu6050.png)
+
+## 3:IC2test.pyを動かして
 
 ```shell
 ['2022/07/03 02:52:37.202883', -0.08, -0.03, 1.05, 3.05, 0.93, -1.0, 1.0]
@@ -22,7 +26,7 @@ pip3 install -r requirements.txt
 
 みたいに出力されれば準備完了
 
-## 3:main.pyを動かす
+## 4:main.pyを動かす
 
 data/csvのフォルダの中に新たなcsvファイルが作られ、その中に値が順次入っていっていれば成功
 
