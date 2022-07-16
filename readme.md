@@ -5,7 +5,7 @@
 pip3 install -r requirements.txt
 ```
 
-## 4:ハード側の準備
+## 2:ハード側の準備
 ![arduino](docs/image/arduino.png)
 ![mpu6050](docs/image/mpu6050.png)
 
