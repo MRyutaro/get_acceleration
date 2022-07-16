@@ -8,7 +8,8 @@ cap = cv2.VideoCapture(1)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-name = "data/video/" + datetime.datetime.today().strftime('%Y_%m%d_%H%M') + ".mp4"
+now = datetime.datetime.today().strftime('%Y_%m%d_%H%M')
+name = "data/video/" + now + ".mp4"
 video = cv2.VideoWriter(name, fourcc, fps, (width, height))
  
 print("start")
