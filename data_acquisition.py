@@ -1,6 +1,5 @@
 import datetime
 import json
-import os
 import pandas as pd
 import serial
 import time
@@ -56,21 +55,16 @@ def save_to_csv(csv_path, data):
             SENSORDATA_LABEL.append(df["sensordata_label"][i])
     df = pd.DataFrame(data=data, columns=SENSORDATA_LABEL)
 
-    if os.path.exists("data/csv") is False:
-        os.mkdir("data/csv")
-    if os.path.isdir(csv_path) is True:
-        os.remove(csv_path)
+    # if os.path.exists("data/csv") is False:
+    #     os.mkdir("data/csv")
+    # if os.path.isdir(csv_path) is True:
+    #     os.remove(csv_path)
     df.to_csv(csv_path)
 
 
 def setup_csv_path():
-    time = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
-    if os.path.exists("data/csv") is False:
-        os.mkdir("data/csv")
-    csv_path = f"data/csv/{time}.csv"
-    if os.path.exists(csv_path) is True:
-        print("1分後待ってプログラムを動かしてください\n")
-        exit()
+    now = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
+    csv_path = f"data/{now}/sensor_data.csv"
     return csv_path
 
 
