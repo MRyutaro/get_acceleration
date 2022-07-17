@@ -73,37 +73,47 @@ void loop()
   Serial.print(gyro_z);
   Serial.print(",");
 
-  if (i < 60){
-    if (j < 5){
-      digitalWrite( 13, HIGH );
-      Serial.print(1);Serial.println("");
+  if (i < 60)
+  {
+    if (j < 5)
+    {
+      digitalWrite(13, HIGH);
+      Serial.print(1);
+      Serial.println("");
     }
-    else if (j < 10){
-      digitalWrite( 13, LOW );
-      Serial.print(0);Serial.println("");
+    else if (j < 10)
+    {
+      digitalWrite(13, LOW);
+      Serial.print(0);
+      Serial.println("");
     }
-    else{
+    else
+    {
       j = 0;
-      Serial.print(0);Serial.println("");
+      Serial.print(0);
+      Serial.println("");
     }
     j += 1;
   }
-  
+
   else if (i < 210)
   {
     digitalWrite(13, HIGH);
-    Serial.print(1);Serial.println("");
+    Serial.print(1);
+    Serial.println("");
   }
-  
+
   else if (i < 360)
   {
     digitalWrite(13, LOW);
-    Serial.print(0);Serial.println("");
+    Serial.print(0);
+    Serial.println("");
   }
-  
+
   else
   {
-    Serial.print(0);Serial.println("");
+    Serial.print(0);
+    Serial.println("");
     i = 60;
   }
 

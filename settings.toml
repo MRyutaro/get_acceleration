@@ -1,5 +1,11 @@
-[settings]
+[video_settings]
 
-# [second]
-video_time = 5
-video_fps = 30
+TIME= 90
+FPS = 10
+CAMERA_NUM = 1
+
+[sensor_settings]
+
+PORT_NUM = "COM3"
+SERIAL_BPS = 115200
+
