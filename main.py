@@ -42,7 +42,6 @@ def main():
     time.sleep(2)
 
     # loop
-    tmp_time = time.time()
     roop = int(VIDEO_FPS * EXECUTION_TIME)
     for i in range(roop):
         # video
@@ -54,8 +53,6 @@ def main():
         line = ser.readline()
         add_data_at_intervals(line)
         save_to_csv(csv_path, data)
-        print(time.time()-tmp_time)
-        tmp_time = time.time()
 
     print("STOP")
     video.release()
