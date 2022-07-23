@@ -3,6 +3,7 @@ import time
 import pandas as pd
 import datetime
 import os
+import winsound
 
 data = list()
 
@@ -17,7 +18,8 @@ def main():
     line = ser.readline()
     time.sleep(2)
 
-    while True:
+    start_time = time.time()
+    while time.time()-start_time < 90:
         line = ser.readline()
         line_disp = line.strip().decode('UTF-8')
         add_data_at_intervals(line_disp)
@@ -25,6 +27,9 @@ def main():
         # 0.1秒くらいで、ずっとデータを取り続けられる。
         time.sleep(0.1)
         save_to_csv(csv_path, data)
+    frequency = 2000
+    duration = 1000
+    winsound.Beep(frequency, duration)
 
 
 def add_data_at_intervals(line_disp):
