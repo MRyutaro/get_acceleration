@@ -1,77 +1,85 @@
+import datetime
+import json
+import os
+import pandas as pd
 import serial
 import time
-import pandas as pd
-import datetime
-import os
+import toml
 import winsound
 
 data = list()
 
 
 def main():
-    # settings
     global data
-    ser = serial.Serial('COM3', 115200, timeout=0.1)
-    csv_path = setup_csv_path()
+    # dir setting
+    now = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
+    make_dir("data")
+    csv_path = "data/" + now + ".csv"
+
+    # sensordata setting
+    obj = toml.load("settings.toml")
+    PORT_NUM = obj["sensor_settings"]["PORT_NUM"]
+    SERIAL_BPS = obj["sensor_settings"]["SERIAL_BPS"]
+    EXECUTION_TIME = obj["video_settings"]["TIME"]
+    ser = serial.Serial(PORT_NUM, SERIAL_BPS, timeout=0.1)
+    line = ser.readline()
 
     print('Serial warming up...')
-    line = ser.readline()
     time.sleep(2)
 
+    make_sound(2000, 100, 1)
     start_time = time.time()
-    while time.time()-start_time < 90:
+    while time.time()-start_time < EXECUTION_TIME:
         line = ser.readline()
-        line_disp = line.strip().decode('UTF-8')
-        add_data_at_intervals(line_disp)
-
-        # 0.1秒くらいで、ずっとデータを取り続けられる。
+        add_data_at_intervals(line)
         time.sleep(0.1)
         save_to_csv(csv_path, data)
-    frequency = 2000
-    duration = 1000
-    winsound.Beep(frequency, duration)
+    make_sound(2000, 100, 2)
 
 
-def add_data_at_intervals(line_disp):
+def make_dir(path):
+    if os.path.exists(path) is False:
+        os.mkdir(path)
+
+
+def add_data_at_intervals(line):
     global data
-    line_disp = line_disp.split(',')
+    now = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
 
-    time = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+    if line == "":
+        return
+    line_disp = line.strip().decode('UTF-8').split(',')
 
     if len(line_disp) == 7:
-        tmp_float_line = list()
+        tmp_line = list()
         for i in range(7):
             # 空白''が入っていないときだけ記録
             if line_disp[i] != '':
-                tmp_float_line.append(float(line_disp[i]))
+                tmp_line.append(float(line_disp[i]))
             else:
                 return
-        tmp_float_line.insert(0, time)
+        tmp_line.insert(0, now)
 
-        print(tmp_float_line)
-        data.append(tmp_float_line)
+        print(tmp_line)
+        data.append(tmp_line)
 
 
 def save_to_csv(csv_path, data):
-    df = pd.DataFrame(data=data, columns=[
-                      "time", "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "gyro_z", "light"])
+    SENSORDATA_LABEL = list()
+    json_path = "config/sensordata_label.json"
 
-    if os.path.exists("data/csv") == False:
-        os.mkdir("data/csv")
-    if os.path.isdir(csv_path) == True:
-        os.remove(csv_path)
+    with open(json_path, "r", encoding="utf-8") as f:
+        df = json.load(f)
+        for i in range(len(df["sensordata_label"])):
+            SENSORDATA_LABEL.append(df["sensordata_label"][i])
+    df = pd.DataFrame(data=data, columns=SENSORDATA_LABEL)
     df.to_csv(csv_path)
 
 
-def setup_csv_path():
-    time = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
-    if os.path.exists("data/csv") == False:
-        os.mkdir("data/csv")
-    csv_path = f"data/csv/{time}.csv"
-    if os.path.exists(csv_path) == True:
-        print("1分後待ってプログラムを動かしてください\n")
-        exit()
-    return csv_path
+def make_sound(frequency, duration, counts):
+    for count in range(counts):
+        winsound.Beep(frequency, duration)
 
 
 if __name__ == "__main__":

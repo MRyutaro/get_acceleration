@@ -1,0 +1,10 @@
+[video_settings]
+
+TIME= 90
+VIDEO_DIR = ""
+
+[sensor_settings]
+
+PORT_NUM = "COM3"
+SERIAL_BPS = 115200
+
