@@ -11,23 +11,21 @@ import winsound
 
 import draw_graph
 
-data = list()
-
 
 def main():
-    global data
-    # dir setting
+    # フォルダの設定
     now = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
     make_dir("data")
     csv_path = "data/" + now + ".csv"
 
-    # sensordata setting
+    # センサーデータの設定
     obj = toml.load("settings.toml")
     PORT_NUM = obj["sensor_settings"]["PORT_NUM"]
     SERIAL_BPS = obj["sensor_settings"]["SERIAL_BPS"]
     EXECUTION_TIME = obj["video_settings"]["TIME"]
     ser = serial.Serial(PORT_NUM, SERIAL_BPS, timeout=0.1)
     sensor_data = ser.readline()
+    all_data = list()
 
     sec, data_list, lines, ax = draw_graph.setup_graph(
         sensor_data)
@@ -41,9 +39,8 @@ def main():
         sensor_data = ser.readline()
         sec, data_list, lines, ax = draw_graph.draw_graph(
             sensor_data, sec, data_list, lines, ax)
-        add_data_at_intervals(sensor_data)
-        # time.sleep(0.1)
-        save_to_csv(csv_path, data)
+        all_data = add_data_at_intervals(sensor_data, all_data)
+        save_to_csv(csv_path, all_data)
     move_and_rename_video()
     make_sound(2000, 100, 2)
 
@@ -58,11 +55,10 @@ def make_dir(path):
         os.mkdir(path)
 
 
-def add_data_at_intervals(sensor_data):
-    global data
+def add_data_at_intervals(sensor_data, all_data):
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S.%f")
     if sensor_data == " ":
-        return
+        return all_data
 
     sensor_data = sensor_data.strip().decode("UTF-8").split(",")
     if len(sensor_data) == 7:
@@ -75,7 +71,8 @@ def add_data_at_intervals(sensor_data):
         tmp_line.insert(0, now)
 
         print(tmp_line)
-        data.append(tmp_line)
+        all_data.append(tmp_line)
+    return all_data
 
 
 def save_to_csv(csv_path, data):
