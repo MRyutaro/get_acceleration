@@ -1,15 +1,15 @@
 # start
 
-## 1:ライブラリをインストール
-```shell 
-pip3 install -r requirements.txt
-```
-
-## 2:ハード側の準備
+## 1:ハード側の準備
 
 ![arduino](docs/image/arduino.png)
 
 ![mpu6050](docs/image/mpu6050.png)
+
+## 2:ライブラリをインストール
+```shell 
+pip3 install -r requirements.txt
+```
 
 ## 3:testフォルダ内のプログラムを試す
 
