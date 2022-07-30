@@ -13,7 +13,7 @@ pip3 install -r requirements.txt
 
 ## 3:testフォルダ内のプログラムを試す
 
-### I2C_test.pyを動かす。成功例↓
+#### ・I2C_test.pyを動かす。成功例↓
 
 ```shell
 【加速度】x:-0.16 y:0.12 z:0.90【角速度】x:-4.99 y:1.56 z:-3.24【ライト】0
@@ -26,11 +26,11 @@ pip3 install -r requirements.txt
 【加速度】x:-0.16 y:0.11 z:0.90【角速度】x:-3.03 y:0.21 z:-2.86【ライト】1
 ```
 
-### draw_graph.pyを動かす。成功例↓
+#### ・draw_graph.pyを動かす。成功例↓
 
 ![graph](docs/image/sensordata_graph.png)
 
-### 適当な動画を録画した後、move_videodir.pyを動かす
+#### ・適当な動画を録画した後、move_videodir.pyを動かす
 
 dataフォルダ内に録画した動画が入っていれば成功。
 
