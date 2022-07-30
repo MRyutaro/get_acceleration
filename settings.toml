@@ -1,7 +1,7 @@
 [video_settings]
 
 TIME= 90
-VIDEO_DIR = ""
+VIDEO_DIR = "普通カメラで撮影したときの保存先フォルダの絶対パス"
 
 [sensor_settings]
 

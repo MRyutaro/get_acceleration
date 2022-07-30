@@ -1,4 +1,3 @@
 data
-*/__pycache__
-graph_plt.py 
+__pycache__
 sample.py
