@@ -31,7 +31,7 @@ pip3 install -r requirements.txt
 
 ![graph](docs/image/sensordata_graph.png)
 
-#### ・適当な動画を録画した後、move_videodir.pyを動かす
+#### ・適当な動画を録画した後、settings.toml内のVIDEO_DIRを書き換え、move_videodir.pyを動かす
 
 dataフォルダ内に録画した動画が入っていれば成功。
 
