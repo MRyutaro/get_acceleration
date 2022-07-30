@@ -14,7 +14,7 @@ import draw_graph
 
 def main():
     # フォルダの設定
-    now = datetime.datetime.now().strftime('%Y_%m%d_%H%M')
+    now = datetime.datetime.now().strftime("%Y_%m%d_%H%M")
     make_dir("data")
     csv_path = "data/" + now + ".csv"
 
@@ -30,7 +30,7 @@ def main():
     sec, data_list, lines, ax = draw_graph.setup_graph(
         sensor_data)
 
-    print('Serial warming up...')
+    print("Serial warming up...")
     time.sleep(2)
 
     make_sound(2000, 100, 1)
